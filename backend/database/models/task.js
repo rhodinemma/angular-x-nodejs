@@ -14,8 +14,7 @@ const TaskSchema = new mongoose.Schema({
   completed: {
     type: Boolean,
     default: false,
-    required: true
-  }
+  },
 });
 
 const Task = mongoose.model("Task", TaskSchema);

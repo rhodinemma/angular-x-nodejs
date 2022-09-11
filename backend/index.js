@@ -63,6 +63,64 @@ app.delete("/tasklists/:tasklistId", (req, res) => {
     });
 });
 
+app.get("tasklists/:tasklistId/tasks", (req, res) => {
+  Task.find({ _taskListId: req.params.tasklistId })
+    .then((tasks) => {
+      res.status(200).send(tasks);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+app.post("/tasklists/:tasklistId/tasks", (req, res) => {
+  let taskObj = { title: req.body.title, _taskListId: req.params.tasklistId };
+  Task(taskObj)
+    .save()
+    .then((task) => {
+      res.status(201).send(task);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+app.get("/tasklists/:tasklistId/tasks/:taskId", (req, res) => {
+  Task.find({ _taskListId: req.params.tasklistId, _id: req.params.taskId })
+    .then((task) => {
+      res.status(200).send(task);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+app.patch("/tasklists/:tasklistId/tasks/:taskId", (req, res) => {
+  Task.findOneAndUpdate(
+    { _taskListId: req.params.tasklistId, _id: req.params.taskId },
+    { $set: req.body }
+  )
+    .then((task) => {
+      res.status(200).send(task);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+app.delete("/tasklists/:tasklistId/tasks/:taskId", (req, res) => {
+  Task.findOneAndDelete({
+    _taskListId: req.params.tasklistId,
+    _id: req.params.askId,
+  })
+    .then((task) => {
+      res.status(200).send(task);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 app.listen(5000, () => {
   console.log("Server started on port 5000");
 });
