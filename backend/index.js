@@ -124,7 +124,7 @@ app.patch("/tasklists/:tasklistId/tasks/:taskId", (req, res) => {
 app.delete("/tasklists/:tasklistId/tasks/:taskId", (req, res) => {
   Task.findOneAndDelete({
     _taskListId: req.params.tasklistId,
-    _id: req.params.askId,
+    _id: req.params.taskId,
   })
     .then((task) => {
       res.status(200).send(task);
