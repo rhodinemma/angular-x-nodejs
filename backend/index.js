@@ -54,13 +54,26 @@ app.put("/tasklists/:tasklistId", (req, res) => {
 });
 
 app.delete("/tasklists/:tasklistId", (req, res) => {
-  TaskList.findByIdAndDelete(req.params.tasklistId)
+  // deleting all subtasks along with their tasklist
+  const deleteSubTasks = (taskList) => {
+    Task.deleteMany({ _taskListId: req.params.tasklistId })
+      .then(() => {
+        return taskList;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const responseTaskList = TaskList.findByIdAndDelete(req.params.tasklistId)
     .then((taskList) => {
-      res.status(200).send(taskList);
+      deleteSubTasks(taskList);
     })
     .catch((error) => {
       console.log(error);
     });
+
+  res.status(204).send(responseTaskList);
 });
 
 app.get("tasklists/:tasklistId/tasks", (req, res) => {
