@@ -1,1 +1,28 @@
-<p>task-screen works!</p>
+<div class="container border mt-4">
+    <h2 class="bg-primary p-2 fw-bold text-center">Task Manager Application</h2>
+
+    <div class="row">
+        <div class="col-4">
+            <h3 class="fw-bold">Task List</h3>
+            <button type="button" class="btn btn-outline-success">New Task List</button>
+            <ul class="list-group">
+                <li *ngFor="let item of taskLists"
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    {{item.title}}
+                    <span class="badge bg-danger rounded-pill">x</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-8">
+            <h3 class="fw-bold">Associated Tasks</h3>
+            <button type="button" class="btn btn-outline-success">New Task</button>
+            <ul class="list-group">
+                <li *ngFor="let item of tasks"
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    {{item.title}}
+                    <span class="badge bg-danger rounded-pill">x</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
