@@ -27,6 +27,11 @@ export class ApiConfigService {
     return this.httpClient.put(`${this.BASE_URL}/${url}`, data);
   }
 
+  // patch API call
+  patch(url: string, data: Object){
+    return this.httpClient.patch(`${this.BASE_URL}/${url}`, data);
+  }
+
   delete(url: string){
     return this.httpClient.delete(`${this.BASE_URL}/${url}`);
   }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiConfigService } from './api-config.service';
+import TaskModel from './models/taskModel';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,19 @@ export class TaskService {
     this.apiConfigService.post(`tasklists/${taskListId}/tasks`, data);
   }
 
+  // delete a task list
+  deleteTaskList(taskListId: string){
+    return this.apiConfigService.delete(`tasklists/${taskListId}/tasks`);
+  }
+
+  // delete a task inside a particular task list
+  deleteATaskInsideATaskList(taskListId: string, taskId: string){
+    return this.apiConfigService.delete(`tasklists/${taskListId}/tasks/${taskId}`);
+  }
+
+  // update status of a task (completed or not)
+  updateTaskStatus(taskListId: string, taskObj: TaskModel){
+    let updateData = { 'completed' : !taskObj.completed }
+    return this.apiConfigService.patch(`tasklists/${taskListId}/tasks/${taskObj._id}`, updateData);
+  }
 }
