@@ -49,7 +49,7 @@ export class TaskService {
   }
 
   // update status of a task (completed or not)
-  updateTaskStatus(taskListId: string, taskObj: TaskModel){
+  updateTaskStatus(taskListId: string, taskObj: TaskModel): Observable<TaskModel>{
     let updateData = { 'completed' : !taskObj.completed }
     return this.apiConfigService.patch(`tasklists/${taskListId}/tasks/${taskObj._id}`, updateData);
   }

@@ -36,7 +36,7 @@ export class ApiConfigService {
 
   // patch API call
   patch(url: string, data: Object){
-    return this.httpClient.patch(`${this.BASE_URL}/${url}`, data);
+    return this.httpClient.patch<TaskModel>(`${this.BASE_URL}/${url}`, data);
   }
 
   delete(url: string){

@@ -13,6 +13,7 @@ export class TaskScreenComponent implements OnInit {
 
   taskLists: TaskListModel[] = [];
   tasks: TaskModel[] = [];
+  taskListId: string = '';
 
   constructor(
     private taskService: TaskService,
@@ -30,13 +31,17 @@ export class TaskScreenComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(
       (params: Params)=>{
-        const taskListId = params['taskListId'];
+        this.taskListId = params['taskListId'];
 
-        if(taskListId){
-          this.taskService.getAlltasksForATaskList(taskListId).subscribe((tasks: TaskModel[])=> this.tasks = tasks)
+        if(this.taskListId){
+          this.taskService.getAlltasksForATaskList(this.taskListId).subscribe((tasks: TaskModel[])=> this.tasks = tasks)
         }
       }
     )
-  }
 
+    const taskClicked = ({ task }: { task: TaskModel; }) =>{
+      this.taskService.updateTaskStatus(this.taskListId, task).subscribe(()=> task.completed = !task.completed)
+    }
+  }
 }
+

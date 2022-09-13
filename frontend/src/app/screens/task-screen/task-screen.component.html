@@ -17,9 +17,10 @@
             <h3 class="fw-bold">Associated Tasks</h3>
             <button type="button" class="btn btn-outline-success">New Task</button>
             <ul class="list-group">
-                <li *ngFor="let item of tasks"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    {{item.title}}
+                <li [class.task-completed]="task.task-completed == true" style="cursor: pointer;"
+                    *ngFor="let task of tasks" (click)="taskClicked(task)"
+                    class="mark-completed list-group-item d-flex justify-content-between align-items-center">
+                    {{task.title}}
                     <span class="badge bg-danger rounded-pill">x</span>
                 </li>
             </ul>
