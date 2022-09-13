@@ -25,7 +25,8 @@ export class TaskScreenComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getAllTaskLists().subscribe(allTaskLists=> {this.taskLists = allTaskLists; 
     // get the 1st task list id and route to it on page load
-    this.router.navigate(['task-list', this.taskLists[0]['_id']]);});
+    // this.router.navigate(['task-list', this.taskLists[0]['_id']]);
+  });
 
     
 
