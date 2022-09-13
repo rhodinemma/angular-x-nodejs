@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
 import TaskListModel from './models/taskListModel';
+import TaskModel from './models/taskModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,14 @@ export class ApiConfigService {
     private httpClient: HttpClient
   ) { }
 
-  // get API call
-  get(url: string){
+  // get tasklists API call
+  getTaskLists(url: string){
     return this.httpClient.get<TaskListModel[]>(`${this.BASE_URL}/${url}`);
+  }
+
+  getAvailableTasks(url: string){
+      return this.httpClient.get<TaskModel[]>(`${this.BASE_URL}/${url}`
+    );
   }
 
   // post API call
